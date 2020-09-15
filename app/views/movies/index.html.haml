@@ -4,12 +4,11 @@
 %table#movies.table.table-striped.col-md-12
   %thead
     %tr
-      %th{:class => @hilite['title']}
-        = link_to "Movie Title", movies_path(:sort => 'title')
-      %th{:class => @hilite['rating']}
-        = link_to "Rating", movies_path(:sort => 'rating')
-      %th{:class => @hilite['release_date']}
-        = link_to "Release Date", movies_path(:sort => 'release_date')
+      - @table_keys.each do |key|
+        %th{:class => is_hilite(key)}
+          = link_to movies_path(@new_params.merge({:sort => key, :order => reverse_order(key)})) do
+            = @table_descriptions[key]
+            %span{:class => order_symbol(key)}
       %th More Info
       
   %tbody
