@@ -1,6 +1,15 @@
 -#  This file is app/views/movies/index.html.haml
 %h2 All Movies
 
+%div{:class => 'mb-2'}
+  = form_tag movies_path, :method => :get do
+    Include:
+    - @all_ratings.each do |rating|
+      %div{:class => 'form-check form-check-inline'}
+        = check_box_tag "ratings[#{rating}]", 1, false, :class => 'form-check-input'
+        = label_tag "ratings[#{rating}]", rating, :class => 'form-check-label'
+    = submit_tag 'Refresh', :class => 'btn btn-primary'
+
 %table#movies.table.table-striped.col-md-12
   %thead
   
